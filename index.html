@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Snehal Dayanand Ugale — Infrastructure Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0D1526;
+    --panel:#121B30;
+    --panel-2:#0F1729;
+    --line:#28324B;
+    --line-soft:#1C2540;
+    --text:#E7EAF2;
+    --muted:#8B96AE;
+    --muted-2:#5E6A87;
+    --signal:#54D6A8;
+    --signal-dim:#2E5A4C;
+    --amber:#E8A33D;
+    --mono:'JetBrains Mono', ui-monospace, monospace;
+    --sans:'IBM Plex Sans', -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.6;
+    font-size:16px;
+  }
+  ::selection{ background:var(--signal-dim); color:var(--text); }
+
+  a{ color:var(--signal); text-decoration:none; border-bottom:1px solid transparent; }
+  a:hover{ border-bottom-color:var(--signal); }
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--signal); outline-offset:3px; }
+
+  .wrap{ max-width:760px; margin:0 auto; padding:0 24px; }
+
+  /* terminal chrome header */
+  .termbar{
+    background:var(--panel-2);
+    border-bottom:1px solid var(--line);
+  }
+  .termbar-inner{
+    max-width:760px; margin:0 auto; padding:14px 24px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .dot{ width:10px; height:10px; border-radius:50%; display:inline-block; }
+  .dot.red{ background:#E8626B; }
+  .dot.amber{ background:var(--amber); }
+  .dot.green{ background:var(--signal); }
+  .termbar-path{
+    font-family:var(--mono); font-size:13px; color:var(--muted);
+    margin-left:6px;
+  }
+  .termbar-path b{ color:var(--text); font-weight:500; }
+
+  header.hero{ padding:56px 0 40px; border-bottom:1px solid var(--line-soft); }
+  h1.name{
+    font-family:var(--sans); font-weight:700;
+    font-size:clamp(28px,5vw,40px);
+    margin:0 0 6px;
+    letter-spacing:-0.01em;
+  }
+  .role{
+    font-family:var(--mono); color:var(--signal);
+    font-size:15px; margin:0 0 18px;
+  }
+  .role::before{ content:"$ "; color:var(--muted-2); }
+  .meta{
+    font-family:var(--mono); font-size:13px; color:var(--muted);
+    display:flex; flex-wrap:wrap; gap:6px 16px; margin:0 0 22px;
+  }
+  .meta span{ margin-right:16px; display:inline-block; }
+  .meta span:last-child{ margin-right:0; }
+  .links{ display:flex; flex-wrap:wrap; gap:10px; }
+  .pill{
+    font-family:var(--mono); font-size:13px;
+    color:var(--text); background:var(--panel);
+    border:1px solid var(--line); border-radius:5px;
+    padding:7px 12px;
+  }
+  .pill:hover{ border-color:var(--signal); border-bottom-color:var(--signal); }
+
+  section{ padding:38px 0; border-bottom:1px solid var(--line-soft); }
+  section:last-of-type{ border-bottom:none; }
+
+  .tag{
+    font-family:var(--mono); font-size:13px; color:var(--muted-2);
+    margin:0 0 18px; display:flex; align-items:center; gap:10px;
+  }
+  .tag::after{ content:""; flex:1; height:1px; background:var(--line-soft); }
+
+  p.body-text{ color:#C6CCDB; max-width:64ch; margin:0 0 14px; }
+
+  /* experience block styled like a manifest */
+  .manifest{
+    font-family:var(--mono); font-size:13px; color:var(--muted);
+    margin-bottom:14px;
+  }
+  .manifest .key{ color:var(--muted-2); }
+  .manifest .val{ color:var(--text); }
+  ul.log{ margin:0; padding-left:0; list-style:none; }
+  ul.log li{
+    position:relative; padding-left:20px; margin-bottom:10px;
+    color:#C6CCDB; font-size:15px;
+  }
+  ul.log li::before{
+    content:"›"; position:absolute; left:0; color:var(--signal);
+    font-family:var(--mono);
+  }
+
+  /* featured project */
+  .project-card{
+    background:var(--panel); border:1px solid var(--line);
+    border-radius:8px; padding:26px 24px;
+  }
+  .stat-row{ display:flex; gap:28px; flex-wrap:wrap; margin:4px 0 22px; }
+  .stat{ margin-right:28px; }
+  .stat:last-child{ margin-right:0; }
+  .stat .num{
+    font-family:var(--mono); font-weight:700; font-size:30px; color:var(--signal);
+    line-height:1;
+  }
+  .stat .label{
+    font-family:var(--mono); font-size:12px; color:var(--muted); margin-top:6px;
+  }
+  .project-title{ font-size:19px; font-weight:600; margin:0 0 10px; }
+  .badge-row{ display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+  .badge{
+    font-family:var(--mono); font-size:12px; color:var(--muted);
+    border:1px solid var(--line-soft); border-radius:4px; padding:4px 9px;
+  }
+  .ci-status{
+    display:inline-flex; align-items:center; gap:7px;
+    font-family:var(--mono); font-size:12px; color:var(--signal);
+    background:var(--signal-dim); border-radius:4px; padding:5px 10px;
+    margin-top:16px;
+  }
+  .ci-status .dot{ width:7px; height:7px; }
+
+  /* skills grid */
+  .skill-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px 28px; }
+  @media (max-width:560px){ .skill-grid{ grid-template-columns:1fr; } }
+  .skill-group h3{
+    font-family:var(--mono); font-size:13px; font-weight:500; color:var(--amber);
+    margin:0 0 8px;
+  }
+  .skill-group p{ color:var(--muted); font-size:14px; margin:0; }
+
+  .cert-list{ display:flex; flex-direction:column; gap:10px; }
+  .cert-row{
+    display:flex; justify-content:space-between; align-items:baseline;
+    gap:16px; padding:10px 0; border-bottom:1px dashed var(--line-soft);
+    font-size:14.5px;
+  }
+  .cert-row:last-child{ border-bottom:none; }
+  .cert-name{ color:var(--text); }
+  .cert-date{ font-family:var(--mono); font-size:12px; color:var(--muted-2); white-space:nowrap; }
+
+  footer{ padding:40px 0 56px; }
+  footer .foot-line{
+    font-family:var(--mono); font-size:13px; color:var(--muted-2);
+  }
+  footer .foot-links{ margin-top:10px; }
+
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+
+<div class="termbar">
+  <div class="termbar-inner">
+    <span class="dot red"></span><span class="dot amber"></span><span class="dot green"></span>
+    <span class="termbar-path">snehal-ugale / <b>infrastructure-engineer.yaml</b></span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <h1 class="name">Snehal Dayanand Ugale</h1>
+    <p class="role">infrastructure engineer — cloud &amp; virtualization</p>
+    <div class="meta">
+      <span>London, UK</span>
+      <span>Graduate Route visa from Sept 2026</span>
+      <span>Available immediately</span>
+    </div>
+    <div class="links">
+      <a class="pill" href="mailto:snehalugale02@gmail.com">email</a>
+      <a class="pill" href="https://www.linkedin.com/in/snehal-ugale-699818200/" target="_blank" rel="noopener">linkedin</a>
+      <a class="pill" href="#" id="cv-link">download cv</a>
+    </div>
+  </header>
+
+  <section id="about">
+    <p class="tag"># about</p>
+    <p class="body-text">
+      Infrastructure Engineer with 4+ years of enterprise experience operating mission-critical
+      virtualization and VDI platforms — Citrix Cloud, VMware vSphere, and Microsoft Hyper-V — alongside
+      Azure and AWS cloud infrastructure. Led on-premises to Azure migrations with minimal downtime, and
+      recently applied hands-on Terraform and GitHub Actions CI/CD in an MSc dissertation project building
+      an ML-based infrastructure misconfiguration scanner. Comfortable across ITIL incident and change
+      management, vulnerability remediation, and Python automation.
+    </p>
+  </section>
+
+  <section id="experience">
+    <p class="tag"># experience</p>
+    <div class="manifest">
+      <span class="key">company:</span> <span class="val">Accenture Solutions Pvt Ltd — Pune, India</span><br>
+      <span class="key">role:</span> <span class="val">Cloud Infrastructure Managed Senior Analyst</span><br>
+      <span class="key">dates:</span> <span class="val">Jan 2021 — Aug 2025</span>
+    </div>
+    <ul class="log">
+      <li>Administered Citrix Cloud on Azure (MCS/PVS, App-V) and XenApp/XenDesktop, operating mission-critical VDI infrastructure for enterprise end users.</li>
+      <li>Administered VMware and Microsoft Hyper-V environments — VM creation, patching, deployment, troubleshooting, and resource optimisation.</li>
+      <li>Managed Azure and AWS cloud infrastructure, including Cloud Virtual Desktop provisioning, snapshot/AMI creation, and EC2 instance management.</li>
+      <li>Led on-premises to Azure cloud migrations, ensuring smooth transitions with minimal downtime.</li>
+      <li>Automated infrastructure tasks using Python; built ServiceNow and Power BI dashboards for SLA and incident tracking.</li>
+      <li>Conducted Qualys vulnerability assessments and remediation, and participated in CAB/TAB change management.</li>
+    </ul>
+  </section>
+
+  <section id="project">
+    <p class="tag"># featured_project</p>
+    <div class="project-card">
+      <p class="project-title">AI-Driven Terraform Misconfiguration Scanner</p>
+      <p class="manifest" style="margin-bottom:18px;">
+        <span class="key">type:</span> <span class="val">MSc dissertation</span> &nbsp;
+        <span class="key">institution:</span> <span class="val">University of East London</span>
+      </p>
+      <div class="stat-row">
+        <div class="stat"><div class="num">95.65%</div><div class="label">XGBoost accuracy</div></div>
+        <div class="stat"><div class="num">0.94</div><div class="label">F1-score</div></div>
+        <div class="stat"><div class="num">480</div><div class="label">Terraform files trained on</div></div>
+      </div>
+      <p class="body-text">
+        Trained and compared Logistic Regression, Random Forest, and XGBoost classifiers on 480 real-world
+        Terraform files spanning six AWS resource types to detect misconfigurations from TF-IDF text
+        features. XGBoost outperformed a rule-based baseline (confirmed via 5-fold cross-validation, mean
+        95.43%). A second classifier assigns graded LOW / MEDIUM / HIGH severity scores at 94.57% accuracy.
+      </p>
+      <p class="body-text">
+        Packaged both models into a scanner deployed inside a GitHub Actions CI/CD pipeline that
+        automatically scans pull requests touching Terraform files and blocks merges on detected
+        HIGH-severity issues — validated against a real pull request containing a deliberately introduced
+        misconfiguration.
+      </p>
+      <div class="ci-status"><span class="dot green"></span> scan passed — PR blocked on HIGH severity</div>
+      <div class="badge-row">
+        <span class="badge">python</span>
+        <span class="badge">scikit-learn</span>
+        <span class="badge">xgboost</span>
+        <span class="badge">terraform</span>
+        <span class="badge">github actions</span>
+        <span class="badge">aws</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <p class="tag"># skills</p>
+    <div class="skill-grid">
+      <div class="skill-group">
+        <h3>virtualization &amp; vdi</h3>
+        <p>Citrix Cloud, MCS/PVS, XenApp/XenDesktop, App-V, VMware vSphere, Microsoft Hyper-V</p>
+      </div>
+      <div class="skill-group">
+        <h3>cloud &amp; automation</h3>
+        <p>Azure, AWS (EC2, S3, IAM, Lambda), Terraform, GitHub Actions CI/CD, Python, scikit-learn / XGBoost</p>
+      </div>
+      <div class="skill-group">
+        <h3>it &amp; service management</h3>
+        <p>Windows Server, Active Directory, FSLogix, ServiceNow, Power BI, ITIL (CAB/TAB)</p>
+      </div>
+      <div class="skill-group">
+        <h3>security &amp; compliance</h3>
+        <p>Qualys vulnerability management, infrastructure-level remediation, network security fundamentals</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="certifications">
+    <p class="tag"># certifications_and_awards</p>
+    <div class="cert-list">
+      <div class="cert-row">
+        <span class="cert-name">Microsoft Certified: Azure Administrator Associate (AZ-104)</span>
+      </div>
+      <div class="cert-row">
+        <span class="cert-name">Microsoft Certified: Azure Fundamentals (AZ-900)</span>
+      </div>
+      <div class="cert-row">
+        <span class="cert-name">Microsoft Certified: Security, Compliance &amp; Identity Fundamentals (SC-900)</span>
+      </div>
+      <div class="cert-row">
+        <span class="cert-name"><a href="https://www.credly.com/users/snehal-ugale.d4ed5d62/badges" target="_blank" rel="noopener">AWS Academy Graduate — Cloud Foundations</a></span>
+        <span class="cert-date">Mar 2026</span>
+      </div>
+      <div class="cert-row">
+        <span class="cert-name">ISACA London Chapter IT Audit Scholarship Programme</span>
+        <span class="cert-date">2025</span>
+      </div>
+      <div class="cert-row">
+        <span class="cert-name">Best Operations Support &amp; Growth Catalyst — Accenture</span>
+        <span class="cert-date">FY2024 Q3</span>
+      </div>
+      <div class="cert-row">
+        <span class="cert-name">Skills Star Award — Accenture</span>
+        <span class="cert-date">FY2024 Q2</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <p class="tag"># education</p>
+    <div class="manifest">
+      <span class="key">degree:</span> <span class="val">MSc Cloud Computing and Artificial Intelligence — University of East London</span><br>
+      <span class="key">dates:</span> <span class="val">Sept 2025 — Sept 2026</span>
+    </div>
+    <div class="manifest" style="margin-top:14px;">
+      <span class="key">degree:</span> <span class="val">Bachelor of Engineering — Savitribai Phule Pune University</span><br>
+      <span class="key">dates:</span> <span class="val">June 2016 — June 2020</span> &nbsp;
+      <span class="key">cgpa:</span> <span class="val">8.0 / 10</span>
+    </div>
+  </section>
+
+  <footer>
+    <p class="foot-line"># contact — open to full-time, graduate scheme, and contract roles in UK infrastructure &amp; cloud</p>
+    <div class="foot-links links">
+      <a class="pill" href="mailto:snehalugale02@gmail.com">snehalugale02@gmail.com</a>
+      <a class="pill" href="https://www.linkedin.com/in/snehal-ugale-699818200/" target="_blank" rel="noopener">linkedin.com/in/snehal-ugale</a>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>
